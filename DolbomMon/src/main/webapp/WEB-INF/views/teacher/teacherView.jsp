@@ -68,17 +68,17 @@ h5{
    	<li class="list-group-item">
 	   	<ul class="list-group list-group-horizontal-sm" >
 		   	<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/sitter-profile-age-new-off.svg" alt="신생아" /><br/>신생아</li>
-		   	<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/sitter-profile-age-young-on.svg" alt="영아" /><br/>영아</li>
-		   	<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/sitter-profile-age-child-on.svg" alt="유아" /><br/>유아</li>
-		   	<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/sitter-profile-age-element-on.svg" alt="초등학생" /><br/>초등학생</li>
+		   	<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/sitter-profile-age-young-off.svg" alt="영아" /><br/>영아</li>
+		   	<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/sitter-profile-age-child-off.svg" alt="유아" /><br/>유아</li>
+		   	<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/sitter-profile-age-element-off.svg" alt="초등학생" /><br/>초등학생</li>
 	   </ul>
    </li>
    <h5>가능한 활동</h5>
    <li class="list-group-item">
    		<ul class="list-group list-group-horizontal-sm" >
-   			<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/change-indoorplay-on.svg" /><br/>실내놀이</li>
+   			<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/change-indoorplay-off.svg" /><br/>실내놀이</li>
    			<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/change-join-walk-off.svg"/><br/>등하원돕기</li>
-   			<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/change-read-on.svg" /><br/>책읽기</li>
+   			<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/change-read-off.svg" /><br/>책읽기</li>
    			<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/change-outdooractivities-off.svg"/><br/>야외활동</li>
    		</ul>
    		<ul class="list-group list-group-horizontal-sm" >
