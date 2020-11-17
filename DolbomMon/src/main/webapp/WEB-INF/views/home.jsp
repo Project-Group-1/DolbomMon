@@ -91,7 +91,7 @@
 
 
 <div id="slider">
-<jsp:include page="bxslider.jsp"/>
+<jsp:include page="bxslider.jsp"/> 
 </div>
 <h1>
 	<a href="/dbmon/join">회원가입</a>
@@ -100,8 +100,19 @@
 <h1><a href="/dbmon/login">로그인</a></h1>
 
 
+
 <a href="teacherList">선생님 페이지</a>
   
+
+
+<h1><a href="teacherList">선생님 페이지</a></h1>
+
+<h1><a href="/dbmon/noticeBoard">공지사항</a></h1>
+<h1><a href="/dbmon/freeBoard">자유게시판</a></h1>
+<h1><a href="/dbmon/bulletinBoard">신고게시판</a></h1>
+<h1><a href="/dbmon/confirmBoard">인증게시판</a></h1>
+
+
 
  <!--  <sitemesh:write property='body'/>-->
          <footer class="footer">

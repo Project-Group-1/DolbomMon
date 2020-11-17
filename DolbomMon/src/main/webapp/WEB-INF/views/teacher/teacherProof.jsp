@@ -11,6 +11,7 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <style>
+
 	#title{
 		margin:20px 5px;
 		display:block;
@@ -24,6 +25,7 @@
 	}
 	
 	.container{width:800px;}
+
 	h4{text-align:center; line-height:40px;}
 	.leftPanel{
 	float:none
@@ -36,9 +38,13 @@
 </head>
 <body>
 <div class="container">
+
 	<div id="title">
    		<div id="titlefont">내 인증 관리</div>
  	</div>
+
+	<h4>내 인증 관리</h4>
+
 	<ul class="list-group-horizontal">
 		
 		<li class="list-group-item">
@@ -51,10 +57,18 @@
 						</span>
 					</div>
 					<div class="row">
+
 					<h9>등초본</h9>	
+
 					</div>
 				</div>
 				<div class="col-7">
+
+					<h9>아이돌봄<br/>인적성뱃지</h9>	
+					</div>
+				</div>
+				<div class="col-8">
+
 				
 					<div class="row">
 						<h7><b>등초본인증</b></h7>
@@ -64,6 +78,7 @@
 					- 발급일 6개월 이내만 유효
 					</div>
 				</div>
+
 				<div class="col-3">
 				<form action="teacherProofIdenti">
 					<button class="btn btn-warning float-right">인증받기</button>
@@ -103,6 +118,10 @@
 				</div>
 				<div class="col-3">
 					<button class="btn btn-warning float-right">인증받기</button>
+
+				<div class="col-2">
+					<button class="btn btn-warning float-right mt-5">인증받기</button>
+
 				</div>
 				
 			</div>
