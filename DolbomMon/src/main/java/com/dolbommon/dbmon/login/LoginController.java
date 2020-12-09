@@ -21,7 +21,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.WebUtils;
 
 import com.dolbommon.dbmon.PwdSha256;
 import com.dolbommon.dbmon.member.MemberVO;
@@ -49,14 +48,12 @@ public class LoginController {
 	//로그인 화면
 	@RequestMapping(value="/loginOk", method=RequestMethod.POST)
 	public ModelAndView loginOk(LoginVO vo, HttpSession ses, HttpServletRequest req, HttpServletResponse res) {
-
+		 System.out.println("암호확인"+vo.getUserpwd());
 	      //암호화
-		 String encryPassword = PwdSha256.encrypt(vo.getUserpwd());
-
+	      String encryPassword = PwdSha256.encrypt(vo.getUserpwd());
 	      vo.setUserpwd(encryPassword);
-	    
+	      System.out.println("암호화 된 패스워드"+vo.getUserpwd());
 		//기존 세션값 제거
-		
 		
 		if(ses.getAttribute("logStatus")!=null) {
 			ses.removeAttribute("logStatus");	
@@ -81,66 +78,24 @@ public class LoginController {
 			
 			//자동로그인 선택시 쿠키 생성
 			if(req.getParameter("loginCookie")!=null) {
-				Cookie loginCookie = new Cookie("loginCookie", ses.getId());
-				vo.setSessionKey(ses.getId());
+				Cookie loginCookie = new Cookie("loginCookie", (String)ses.getAttribute("userid"));
 				loginCookie.setPath("/dbmon");
 				loginCookie.setMaxAge(60*60*24*7);
 				res.addCookie(loginCookie);
-				dao.keepLogin(vo);	//세션아이디와 유효기간을 vo에 저장
+				System.out.println(loginCookie.getValue());
 			}
 			mav.setViewName("redirect:/");
 		}
 		return mav;
 	}
 	
-	@RequestMapping(value="/logout", method=RequestMethod.GET)
-	public String logout(LoginVO vo, HttpSession ses, HttpServletRequest req, HttpServletResponse res){
-		/*
-		Cookie[] cookies = req.getCookies(); // 모든 쿠키의 정보를 cookies에 저장
-	
-			if(cookies != null){ 
-	
-			for(int i=0; i< cookies.length; i++){ 
-	
-			cookies[i].setMaxAge(0); 
-	
-			res.addCookie(cookies[i]); 
-	
-			}
-		}
-		*/
-		Cookie cookie = new Cookie("loginCookie", null);
-		cookie.setMaxAge(0);
-		res.addCookie(cookie);
-		ses.invalidate();
-		return "home";
-	}
-	
-	/*
 	//로그아웃
 	@RequestMapping("/logout")
-	public String logout(LoginVO vo, HttpSession ses, HttpServletRequest req, HttpServletResponse res) {	
+	public String logout(HttpSession ses) {
+		ses.invalidate();
 		
-		
-		if(ses.getAttribute("userid")!=null) {
-			
-			vo.setUserid((String)ses.getAttribute("userid"));
-			System.out.println(vo.getUserid());
-			LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
-			
-			Cookie loginCookie = WebUtils.getCookie(req, "loginCookie");
-			if (loginCookie != null) {
-				
-				loginCookie = new Cookie("loginCookie", null);
-				loginCookie.setMaxAge(0);
-				loginCookie.setPath("/");
-			    res.addCookie(loginCookie);
-				dao.cookieReset(vo.getUserid());
-				//ses.invalidate();
-			}
 		return "home";
 	}
-	*/
 	
 	//계정찾기 폼으로 이동
 	@RequestMapping("/searchId")
@@ -249,32 +204,12 @@ public class LoginController {
 		return mav;	
 	}
 	
-	
 	//임시로그인버튼 작동.. 추후 삭제 요망
 	@RequestMapping("/temporaryLogin")
 	public ModelAndView temporaryLogin(LoginVO vo, HttpSession ses) {
 		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
 		vo.setUserid("test1");
-		vo.setUserpwd("03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4");
-		LoginVO resultVO = dao.loginOk(vo);
-		ModelAndView mav = new ModelAndView();
-		
-		if(resultVO==null) {
-			mav.setViewName("redirect:login");			
-		}else {
-			ses.setAttribute("userid", resultVO.getUserid());
-			ses.setAttribute("username", resultVO.getUsername());
-			ses.setAttribute("logStatus", "Y");
-			mav.setViewName("redirect:/");	
-		}
-		return mav;
-	}
-	
-	@RequestMapping("/temporaryLoginP")
-	public ModelAndView temporaryLoginP(LoginVO vo, HttpSession ses) {
-		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
-		vo.setUserid("test11");
-		vo.setUserpwd("03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4");
+		vo.setUserpwd("1234");
 		LoginVO resultVO = dao.loginOk(vo);
 		ModelAndView mav = new ModelAndView();
 		
