@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -34,19 +33,13 @@ public class JobSearchController {
 	//구인페이지로 이동하기
 
 	@RequestMapping("/sitter_list") 
-	public ModelAndView sitter(HttpSession ses, HttpServletRequest req) {
+	public ModelAndView sitter(HttpSession ses) {
 		String userid = (String)ses.getAttribute("userid");
 		
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
 		List<TeacherVO> list = dao.jobSearchBoardList(); //선생님 리스트
 		HashSet<TeacherVO> hash = dao.selectAllTeacher();//지도의 모든 선생/부모 위치
-		TeacherVO mvo = null;
-		if(req.getParameter("userid")==null) {
-			//로그인 안 했을 때 지도 위치 지정 >test1계정의 위치 띄워줌
-			mvo = dao.selectTTMap("test1");
-		} else {
-		mvo = dao.selectTTMap(userid); //내 위치
-		}
+		TeacherVO mvo = dao.selectTTMap(userid); //내 위치
 		int totalRecord = dao.getTotalRecord();	//총 게시물 수
 		
 		
@@ -161,22 +154,14 @@ public class JobSearchController {
 
 
 	@RequestMapping("/parentHeart") //부모 찜리스트에 보여지는 선생님 정보
-	public ModelAndView parentHeart(HttpSession ses, HttpServletRequest req, HeartPagingVO hvo) {
+	public ModelAndView parentHeart(HttpSession ses) {
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		//리스트보여주기
+		
 		String userid = (String)ses.getAttribute("userid");
 		System.out.println("세션 아이디"+userid);
 		List<TeacherVO> list = dao.selectHeart(userid);
 		System.out.println("리스트"+list);
-		//페이징
-		String nowPageTxt = req.getParameter("nowPage");
-		if(nowPageTxt!=null) { //페이지 번호를 request한 경우
-			hvo.setNowPage(Integer.parseInt(nowPageTxt));
-		}
-		hvo.setTotalRecord(dao.getTotalRecord()); //총 레코드 수
-		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("hvo", hvo);
 		mav.addObject("list", list);
 		mav.setViewName("/parents/parentHeart");
 		return mav;
@@ -223,6 +208,7 @@ public class JobSearchController {
 		
 		return result;
 	}
+	
 	
 	
 }
